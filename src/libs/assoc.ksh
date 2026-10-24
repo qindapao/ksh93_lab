@@ -1,11 +1,7 @@
 ((_INCLUDED.src_libs_assoc++)) && return 0
 
 function assoc_test_keys {
-    typeset -A assoc=(
-        [']']=1
-        ['[']=1
-        ['\']=1
-    )
+    typeset -A assoc=( [']']=1 ['[']=1 ['\']=1 )
 
     {
         unset -v assoc[']']
