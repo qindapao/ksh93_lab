@@ -1,8 +1,10 @@
 
+compound _INCLUDED
+((_INCLUDED.src_libs_common++)) && return 0
+
 [[ "$MSYSTEM_CHOST" == *w64-mingw32* ]] && {
     export PATH=/ucrt64/bin:/usr/bin:/usr/local/bin
 }
-compound _INCLUDED
 
 # 锁死区域设置，确保多字节字符（如中文）长度统计正确
 # export LC_ALL=C.UTF-8
@@ -12,10 +14,6 @@ export LC_CTYPE=C.UTF-8   # 管字符长度（中文算2）
 export LC_COLLATE=C      # 管排序规则（纯 ASCII 字典序）
 # 锁死数字格式，确保小数点永远是标准点号 (.)，防止跨环境浮点数或计算解析错乱
 export LC_NUMERIC=C
-
-((_INCLUDED.src_libs_common++)) && return 0
-
-
 
 
 return 0

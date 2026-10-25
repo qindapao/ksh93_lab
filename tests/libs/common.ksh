@@ -8,7 +8,7 @@
 function assert_array_equals {
     nameref exp=$1
     nameref act=$2
-    typeset desc="${3:-"Array Comparison"}"
+    typeset desc=${3:-"Array Comparison"}
 
     # 1. 检查总元素个数（长度）是否一致
     if (( ${#exp[@]} != ${#act[@]} )); then
@@ -26,10 +26,14 @@ function assert_array_equals {
     fi
 
     # 3. 逐个下标比对对应的值
-    typeset k
+    typeset k q_k q_exp q_act
     for k in "${exp_keys[@]}"; do
         if [[ "${exp[$k]}" != "${act[$k]}" ]]; then
-            print -u2 "[FAIL] $desc: 下标 [$k] 的值不匹配 -> 期望: '${exp[$k]}', 实际: '${act[$k]}'"
+            printf -v q_k   "%q" "$k"
+            printf -v q_exp "%q" "${exp[$k]}"
+            printf -v q_act "%q" "${act[$k]}"
+
+            print -r -u2 -- "[FAIL] $desc: 下标 [$q_k] 的值不匹配 -> 期望: $q_exp, 实际: $q_act"
             return 1
         fi
     done

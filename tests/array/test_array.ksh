@@ -16,6 +16,14 @@ function test_array_sort_dict {
         echo "test fail."
     fi
 
+    typeset -A dict1=([$'\t\n ()$[]']=1 )
+    typeset -A dict1_spec=([$'\t\n ()$[]']=1 )
+    if assert_array_equals dict1 dict1_spec ; then
+        echo "test pass."
+    else
+        echo "test fail."
+    fi
+
 }
 
 test_array_sort_dict
