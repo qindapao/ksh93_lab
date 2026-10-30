@@ -66,7 +66,8 @@ function test_4 {
     typeset -A test_db.lev1.lev2.lev3
     typeset -A test_db.lev1.lev2.lev3['[]']=()
     typeset -A test_db.lev1.lev2.lev3['[]']['][']=()
-    test_db.lev1.lev2.lev3['[]'][']['][key1]=1
+    nameref ref=test_db.lev1.lev2.lev3['\[\]']['\]\[']
+    ref[key1]=2
     print -v test_db
 
 }
